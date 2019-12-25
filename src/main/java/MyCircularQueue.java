@@ -1,5 +1,8 @@
 import sun.invoke.empty.Empty;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 class MyCircularQueue {
 
     private int[] data;
@@ -19,55 +22,69 @@ class MyCircularQueue {
 
     /** Insert an element into the circular queue. Return true if the operation is successful. */
     public boolean enQueue(int value) {
-        //向队列中添加值，首先判断数组是否为空
-        if(isEmpty()){
-            //初始化栈首坐标为0
-            head = 0;
-        }
         //判断数组是否已满
         if(isFull()){
             //队列已满，添加失败，返回false
             return false;
         }
+        //向队列中添加值，判断数组是否为空
+        if(isEmpty()){
+            //初始化栈首坐标为0
+            head = 0;
+        }
+
         //赋值
-        data[head] = value;
-        //计算栈尾坐标
-        foot = foot++;
+        foot = (foot +1)%size;
+        data[foot] = value;
         return true;
     }
 
     /** Delete an element from the circular queue. Return true if the operation is successful. */
     public boolean deQueue() {
-
-        return false;
+        if(isEmpty()){
+            return  false;
+        }
+        if(head == foot){
+            head =-1;
+            foot =-1;
+            return true;
+        }
+        head = (head + 1)%size;
+        return true;
     }
 
     /** Get the front item from the queue. */
     public int Front() {
+        if(isEmpty()){
+            return -1;
+        }
+        return data[head];
 
     }
 
     /** Get the last item from the queue. */
     public int Rear() {
-
+        if (isEmpty()) return -1;
+        return data[head];
     }
 
     /** Checks whether the circular queue is empty or not. */
     public boolean isEmpty() {
-        if(data.length == 0){
-            return true;
-        }else {
-            return false;
-        }
+        if(head == -1) return true;
+        return false;
     }
 
     /** Checks whether the circular queue is full or not. */
     public boolean isFull() {
-        if(data.length == size){
+        if((foot +1)%size == head){
             return true;
-        }else {
-            return false;
         }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        Queue<Integer> list = new LinkedList<>();
+
     }
 }
 
