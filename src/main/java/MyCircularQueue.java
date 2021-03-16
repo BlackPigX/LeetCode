@@ -1,4 +1,3 @@
-import sun.invoke.empty.Empty;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -9,8 +8,6 @@ class MyCircularQueue {
     private int head;
     private int foot;
     private int size;
-    private int index_head;
-    private int index_foot;
 
     /** Initialize your data structure here. Set the size of the queue to be k. */
     public MyCircularQueue(int k) {
@@ -64,14 +61,20 @@ class MyCircularQueue {
 
     /** Get the last item from the queue. */
     public int Rear() {
-        if (isEmpty()) return -1;
-        return data[head];
+        if (isEmpty()) {
+            return -1;
+        }else {
+            return data[head];
+        }
     }
 
     /** Checks whether the circular queue is empty or not. */
     public boolean isEmpty() {
-        if(head == -1) return true;
-        return false;
+        if(head == -1) {
+            return true;
+        }else {
+            return false;
+        }
     }
 
     /** Checks whether the circular queue is full or not. */
@@ -83,7 +86,10 @@ class MyCircularQueue {
     }
 
     public static void main(String[] args) {
-        Queue<Integer> list = new LinkedList<>();
+        MyCircularQueue myCircularQueue = new MyCircularQueue(10);
+        myCircularQueue.enQueue(111);
+        boolean empty = myCircularQueue.isEmpty();
+        System.out.println(empty);
 
     }
 }
